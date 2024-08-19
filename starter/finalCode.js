@@ -2,9 +2,9 @@ const prompt = require('prompt-sync')();
 
 const gravity = require('./utils/earthGravityFactors.js')
 
-const Aliengravity = require('./utils/alienGravityFactors.js')
+const alienGravityFactors = require('./utils/alienGravityFactors.js')
 
-function showUserFactors(type, value) {
+function showUserFactors(type, value, measurement, results) {
 
     let results = {
     };
@@ -33,27 +33,33 @@ function showUserFactors(type, value) {
 
 }
 function getUserInput() {
-    console.log("enter your measurement type ('jump' or 'weight' or 'pushup')");
-    let factortype = ["jump", "weight", "pushups"];
-    
-    const type = prompt(">>");
-    
-    for (let i = 0; i < factortype.length - 1; i++){ 
+    // console.log("enter your measurement type ('jump' or 'weight' or 'pushup')");
+    // let factortype = ["jump", "weight", "pushups"];
+    {  
         while (true) {
-            console.log("Please enter either 'jump ' or 'weight '")
+            param1 = prompt("")
             break;
         }
-    
-        if (type.trim().toLowerCase() === factortype[i]) {
-            match = true;
-            break;
-        }
-        
+
+
+    // const type = prompt(">>");
+
+    // for (let i = 0; i < factortype.length - 1; i++) {
+    //     while (true) {
+    //         console.log("Please enter either 'jump ' or 'weight '")
+    //         break;
+    //     }
+
+    //     if (type.trim().toLowerCase() === factortype[i]) {
+    //         match = true;
+    //         break;
+    //     }
+
     }
-    
+
     console.log("enter the value (as a number)");
     const value = prompt(">>");
-     
+
 
     showUserFactors(type, value);
 
