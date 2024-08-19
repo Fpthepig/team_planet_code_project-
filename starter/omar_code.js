@@ -1,51 +1,72 @@
+t // Import the prompt-sync library to handle user input
 const prompt = require('prompt-sync')();
-// require gravityFactors from "./gravityFactors.js"
-const gravityFactors = require('./gravityFactors.js');
-// create a function called calculateWeightOnPlanets
+// Import the gravityFactors module which contains factors for different planets
+const gravityFactors = require('./utils/earthGravityFactors.js');
+const alienGravityFactors = require('./utils/alienGravityFactors.js');
+// Define a function to show user factors based on input type and value
+function showUserFactors(type, value) {
 
-// pass an argument of earthWeight
-function calculateWeight(earthWeight) {
-    // inside the function initialize an empty object
-    const planetWeights = {};
-    // the object is called planetWeights
-    // iterate over gravityFactors
-    for (let planet in gravityFactors) {
 
-        // assign a key, value pair to planetWeights for each iteration
-        planetWeights[planet] = parseFloat((earthWeight * gravityFactors[planet]).toFixed(2));
-        // planetWeights[planet] = Math.round((earthWeight * gravityFactors[planet]) * 100) / 100;
-        // the value of each key should be earthWeight times the value of the current
-        // iteration of gravityFactors
-        // Make sure the values are floats to two decimals
+    // Initialize an object to hold the results
+    let results = {};
+
+    // Declare a variable to hold the unit of measurement
+    let measurement;
+
+    // Iterate over each item in the gravityFactors object
+    for (let planets in gravityFactors) {
+
+
+        // Calculate the factor multiplied by the input value and round it to two decimals
+        results[planets] = parseFloat((gravityFactors[planets] * value).toFixed(2));
+
+        // Switch case to determine the measurement unit based on factor type
+
+        switch (type) {
+            case "jump":
+                measurements = "cm";
+                break;
+            case 'weight':
+                measurements = "kg";
+                break;
+            default:
+                measurements = "units";
+        }
     }
-    // return the planetWeights object from the function
-    console.log(planetWeights);
-}
-function getUserWeight() {
-    console.log("Enter your weight in kg");
-    const userWeight = prompt(">");
-    console.log("Your weight is:", userWeight);
-    // create a method to take the user weight
-    // and log the weight on other planets
-    console.log("Your weight on other planets is:");
-    calculateWeight(userWeight);
-}
-global.getUserWeight = getUserWeight;
-// console.log("Your weight on other planets is:");
-// console.log(calculateWeight(100));
-// console log the planetWeights assume the function
-// is passed in an earthWeight of 100(kg)
+    // Iterate over the results and log each one
+    for (let planet in results) {
+        console.log(`your ${type} on ${planet} is ${results[planet]} ${measurements}`)
 
-// make a comment at the bottom of the script
-// telling a user how to run the script from node
-// run in the terminal `node calculateWeight.js`
-
-function planetPhrase() {
-    for (let planets in planetWeights)
-        console.log(`Your weight on ${planet} is ${planetWeights[planet]}kg `);
-    // console.log("Enter your weight in kg");
-    // const userWeight = prompt(">");
-    // console.log("Your weight on", [planet], "is:", userWeight);
-    // calculateWeight(userWeight);
-
+    }
 }
+
+// Define a function to get user inputs for factor type and value
+function getUserInput() {
+    // Prompt the user to enter the type of factor they want to calculate
+    console.log("Jump or Weight?");
+    let factorType = ["jump", "weight", "pushups"];
+    // Prompt the user to enter the numerical value of the factor
+    const type = prompt(">> ");
+    let match = false;
+    for (let i = 0; i < factorType.length - 1; i++) {
+        if (type.trim().toLowerCase() === factorType[i]) {
+            match = true;
+            break;
+        }
+        while (true) {
+            console.log("Please enter either 'jump' or 'Weight'");
+          
+            break;
+        }
+
+    }
+
+    console.log("enter the value");
+    const value = prompt(">> ");
+    // Call the showUserFactors function with the user inputs and the gravity factors
+    showUserFactors(type, value);
+    // Expose getUserFactors globally
+}
+getUserInput();
+global.getUserInput = getUserInput;
+global.showUserFactor = showUserFactors;
