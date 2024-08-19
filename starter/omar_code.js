@@ -1,72 +1,92 @@
-t // Import the prompt-sync library to handle user input
+// Import the prompt-sync library to handle user input
 const prompt = require('prompt-sync')();
-// Import the gravityFactors module which contains factors for different planets
-const gravityFactors = require('./utils/earthGravityFactors.js');
+// import earthGravity Factors
+const earthGravityFactors = require('./utils/earthGravityFactors.js');
+// import alienGravityFactors
 const alienGravityFactors = require('./utils/alienGravityFactors.js');
-// Define a function to show user factors based on input type and value
-function showUserFactors(type, value) {
 
+// Your factorType is finalValue ___measurement__ on planet in the __earth solar system___
+function showUserFactors(factorType, factorPlanets, factorUnit, factorValue) {
+    // make object to hold final values
 
-    // Initialize an object to hold the results
-    let results = {};
+    // make calculation that will be passed to the final object as final values
 
-    // Declare a variable to hold the unit of measurement
-    let measurement;
-
-    // Iterate over each item in the gravityFactors object
-    for (let planets in gravityFactors) {
-
-
-        // Calculate the factor multiplied by the input value and round it to two decimals
-        results[planets] = parseFloat((gravityFactors[planets] * value).toFixed(2));
-
-        // Switch case to determine the measurement unit based on factor type
-
-        switch (type) {
-            case "jump":
-                measurements = "cm";
-                break;
-            case 'weight':
-                measurements = "kg";
-                break;
-            default:
-                measurements = "units";
-        }
-    }
-    // Iterate over the results and log each one
-    for (let planet in results) {
-        console.log(`your ${type} on ${planet} is ${results[planet]} ${measurements}`)
-
-    }
+    // do any other final variable manipulation
+    // in some for loop
+    console.log(`your ${factorType} is ${finalValue} ${factorUnit} on ${planet} in ${factorPlanets}`)
+    getUserInput();
 }
 
-// Define a function to get user inputs for factor type and value
 function getUserInput() {
-    // Prompt the user to enter the type of factor they want to calculate
-    console.log("Jump or Weight?");
-    let factorType = ["jump", "weight", "pushups"];
-    // Prompt the user to enter the numerical value of the factor
-    const type = prompt(">> ");
-    let match = false;
-    for (let i = 0; i < factorType.length - 1; i++) {
-        if (type.trim().toLowerCase() === factorType[i]) {
-            match = true;
+    let param1;
+    let param2;
+    let param3;
+    let param4;
+    while (true) {
+        let validWords = ["push ups", "weight", "jump"];
+        console.log("What would you like to measure (push ups, weight, jump)");
+        param1 = prompt(">>");
+        let isMatch = false;
+        for (let i = 0; i < validWords.length; i++) {
+            if (param1 === validWords[i]) {
+                
+                isMatch = true;
+                break;
+            }
+            else {
+                console.log("WRONG!!! TRY AGAIN!!!");
+                
+                break;
+            }
+            
+
+
+        }
+        break;
+    }
+    while (true) {
+        if (param2 !== "pushups") {
+            console.log("what measurement system 1 or metrci 2 for imperial");
+            param2 = prompt(">>");
+        }
+        if (!isNaN(param2) && 4 > factorySystem > 0) {
+            switch (param2) {
+                case "1":
+                    param2 = "metric";
+                    // something
+                    break;
+                case "2":
+                    param2 = "imperial";
+                    // something
+                    break;
+                default:
+                    break;
+                // something if number isn't accounted for
+            }
+            break;
+        } else {
+            console.error("please enter correctly");
+        }
+        
+    };
+    let factorUnit = "repetitions";
+    if (factorSystem === "metric") {
+        if (factorType === "weight") {
+
+        }
+        while (true) {
+            console.log("What do you want for param3 ?");
+            param3 = prompt(">>");
             break;
         }
         while (true) {
-            console.log("Please enter either 'jump' or 'Weight'");
-          
+            console.log("What do you want for param4?");
+            param4 = prompt(">>");
             break;
         }
-
+        showUserFactors(param1, param2, param3, param4);
     }
-
-    console.log("enter the value");
-    const value = prompt(">> ");
-    // Call the showUserFactors function with the user inputs and the gravity factors
-    showUserFactors(type, value);
-    // Expose getUserFactors globally
-}
-getUserInput();
+};
 global.getUserInput = getUserInput;
-global.showUserFactor = showUserFactors;
+
+getUserInput();
