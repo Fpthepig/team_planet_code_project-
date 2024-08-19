@@ -83,7 +83,7 @@ function getUserInput() {
     }
 
     while (true) {
-        console.log("What do you want for param3 ?");
+        console.log(" What is the vlaue  ?");
         param3 = prompt(">>");
         break;
     }
