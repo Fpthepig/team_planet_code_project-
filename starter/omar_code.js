@@ -1,4 +1,4 @@
-// Import the prompt-sync library to handle user input
+t // Import the prompt-sync library to handle user input
 const prompt = require('prompt-sync')();
 // Import the gravityFactors module which contains factors for different planets
 const gravityFactors = require('./utils/earthGravityFactors.js');
